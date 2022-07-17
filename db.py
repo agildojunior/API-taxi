@@ -25,6 +25,36 @@ def get_db():
 #-----------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
+#
+
+def query_empresas_to_dict(conn , query):#funcao transformando tipo dos dados das empresas
+    cursor = conn.cursor()
+    cursor.execute(query)
+    empresas_dict = [{'ID_empresa':row[0], 'nome':row[1], 'cnpj':row[2]}
+                        for row in cursor.fetchall()]
+    return empresas_dict
+
+
+def query_taxis_to_dict(conn , query):#funcao transformando tipo dos dados das empresas
+    cursor = conn.cursor()
+    cursor.execute(query)
+    taxis_dict = [{'ID_taxi':row[0], 'nome_motorista':row[1]}
+                        for row in cursor.fetchall()]
+    return taxis_dict
+
+
+def query_corridas_to_dict(conn , query):#funcao transformando tipo dos dados das empresas
+    cursor = conn.cursor()
+    cursor.execute(query)
+    corridas_dict = [{'ID_corrida':row[0], 'ID_empresa':row[1], 'ID_taxi':row[2], 'status':row[3], 'Cliente':row[4], 'destino':row[5], 'origem':row[6]}
+                        for row in cursor.fetchall()]
+    return corridas_dict
+
+#-----------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
 
 #inserir dados em empresas
 def insert_empresas(args=()):

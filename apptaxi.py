@@ -91,13 +91,13 @@ def add_corridas():
 #----------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------
-#todos os dados das empresas
-def query_empresas_to_dict(conn , query):#funcao transformando tipo dos dados das empresas
-    cursor = conn.cursor()
-    cursor.execute(query)
-    empresas_dict = [{'ID_empresa':row[0], 'nome':row[1], 'cnpj':row[2]}
-                        for row in cursor.fetchall()]
-    return empresas_dict
+#todos os dados das empresa
+#def query_empresas_to_dict(conn , query):#funcao transformando tipo dos dados das empresas
+#    cursor = conn.cursor()
+#    cursor.execute(query)
+#    empresas_dict = [{'ID_empresa':row[0], 'nome':row[1], 'cnpj':row[2]}
+#                        for row in cursor.fetchall()]
+#    return empresas_dict
 @app.route("/empresas", methods=['GET'])
 def get_empresas():
     #receber dados do banco
@@ -105,18 +105,18 @@ def get_empresas():
         SELECT ID_empresa, nome, cnpj
         FROM empresas;
     """
-    empresas_dict = query_empresas_to_dict(g.conn , query) #funcao transformando tipo dos dados
+    empresas_dict = db.query_empresas_to_dict(g.conn , query) #funcao transformando tipo dos dados
 
     return {'empresas': empresas_dict}
 
 
 #todos os dados dos taxis
-def query_taxis_to_dict(conn , query):#funcao transformando tipo dos dados das empresas
-    cursor = conn.cursor()
-    cursor.execute(query)
-    taxis_dict = [{'ID_taxi':row[0], 'nome_motorista':row[1]}
-                        for row in cursor.fetchall()]
-    return taxis_dict
+#def query_taxis_to_dict(conn , query):#funcao transformando tipo dos dados das empresas
+#    cursor = conn.cursor()
+#    cursor.execute(query)
+#    taxis_dict = [{'ID_taxi':row[0], 'nome_motorista':row[1]}
+#                        for row in cursor.fetchall()]
+#    return taxis_dict
 @app.route("/taxis", methods=['GET'])
 def get_taxis():
     #receber dados do banco
@@ -124,18 +124,18 @@ def get_taxis():
         SELECT ID_taxi, nome_motorista
         FROM taxis;
     """
-    taxis_dict = query_taxis_to_dict(g.conn , query) #funcao transformando tipo dos dados
+    taxis_dict = db.query_taxis_to_dict(g.conn , query) #funcao transformando tipo dos dados
 
     return {'taxis': taxis_dict}
 
 
 #todos os dados das corridas
-def query_corridas_to_dict(conn , query):#funcao transformando tipo dos dados das empresas
-    cursor = conn.cursor()
-    cursor.execute(query)
-    corridas_dict = [{'ID_corrida':row[0], 'ID_empresa':row[1], 'ID_taxi':row[2], 'status':row[3], 'Cliente':row[4], 'destino':row[5], 'origem':row[6]}
-                        for row in cursor.fetchall()]
-    return corridas_dict
+#def query_corridas_to_dict(conn , query):#funcao transformando tipo dos dados das empresas
+#    cursor = conn.cursor()
+#    cursor.execute(query)
+#    corridas_dict = [{'ID_corrida':row[0], 'ID_empresa':row[1], 'ID_taxi':row[2], 'status':row[3], 'Cliente':row[4], 'destino':row[5], 'origem':row[6]}
+#                        for row in cursor.fetchall()]
+#    return corridas_dict
 @app.route("/corridas", methods=['GET'])
 def get_corridas():
     #receber dados do banco
@@ -143,7 +143,7 @@ def get_corridas():
         SELECT ID_corrida, ID_empresa, ID_taxi, status, Cliente, destino, origem
         FROM corridas;
     """
-    corridas_dict = query_corridas_to_dict(g.conn , query) #funcao transformando tipo dos dados
+    corridas_dict = db.query_corridas_to_dict(g.conn , query) #funcao transformando tipo dos dados
 
     return {'corridas': corridas_dict}
 
